@@ -118,7 +118,7 @@ export const store = new Vuex.Store({
         value: 1497.2475
       }
     ],
-    currency: 'USD'
+    currency: 'EUR'
   },
   mutations: {
     assignPrice: (state, payload) => {
