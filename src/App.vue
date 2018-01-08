@@ -38,7 +38,7 @@ export default {
   name: 'app',
   data() {
     return {
-      currency: 'USD',
+      currency: this.$store.state.currency,
       mode: this.$route.params.mode
     };
   },

@@ -14,7 +14,7 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      selected: 'USD'
+      selected: this.$store.state.currency
     };
   },
   methods: {

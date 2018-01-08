@@ -50,6 +50,7 @@ async function getBinancePrice(code) {
 }
 
 async function getCMCPrice(code, currency) {
+  console.log(currency);
   return axios
     .get(
       `https://api.coinmarketcap.com/v1/ticker/${code}/?convert=${currency}`,
