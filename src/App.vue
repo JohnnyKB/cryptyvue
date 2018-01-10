@@ -4,20 +4,35 @@
       <div class="col">
         <h1>Crypto Dashboard elPiso💎</h1>
         <h2>Total moneys: <strong>{{ total | round-2dec | currency(currency) }}</strong></h2>
+        <div @click="showAmountControls = !showAmountControls" class="btn btn-sm btn-light">Toggle amount controllers</div>
       </div>
     </div>
     <hr>
-    <amount-controller></amount-controller>
-    <hr>
-    <div class="row justify-content-md-center">
+    <div v-if="showAmountControls">
+      <amount-controller></amount-controller>
+      <hr>
+    </div>
+    <div class="row justify-content-center">
       <coin v-for="c in coins" :data="c" :key="c.code" :currency="currency"></coin>
     </div>
     <div v-if="mode==='johnny'">
       <hr>
-      <div class="row justify-content-md-center mt-3">
-        <h3>Johnny total: <strong>{{ johnnyTotal | round-2dec | currency(currency) }}</strong> <small>({{ total*0.4 | round-2dec | currency(currency) }})</small></h3>
+      <div class="row justify-content-center mt-3">
+        <h3>Johnny total: <strong>{{ johnnyTotal | round-2dec | currency(currency) }}</strong></h3>
+        <div class="table-responsive">
+        <table class="table table-sm" style="max-width: 320px; margin: 0 auto;">
+          <tr>
+            <td>+40%</td>
+            <td>{{ total*0.4 | round-2dec | currency(currency) }}</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td><strong>{{ johnnyTotal + total * 0.4 | round-2dec | currency(currency) }}</strong></td>
+          </tr>
+        </table>
+        </div>
       </div>
-      <div class="row justify-content-md-center mt-3">
+      <div class="row justify-content-center mt-3">
         <coin v-for="c in johnnyCoins" :data="c" :key="c.code" :currency="currency"></coin>
       </div>
     </div>
@@ -39,7 +54,8 @@ export default {
   data() {
     return {
       currency: this.$store.state.currency,
-      mode: this.$route.params.mode
+      mode: this.$route.params.mode,
+      showAmountControls: false
     };
   },
   computed: {
