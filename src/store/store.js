@@ -50,7 +50,6 @@ async function getBinancePrice(code) {
 }
 
 async function getCMCPrice(code, currency) {
-  console.log(currency);
   return axios
     .get(
       `https://api.coinmarketcap.com/v1/ticker/${code}/?convert=${currency}`,
@@ -119,7 +118,21 @@ export const store = new Vuex.Store({
         value: 1497.2475
       }
     ],
-    currency: 'EUR'
+    currency: 'EUR',
+    shares: {
+      johnny: {
+        name: 'Johnny',
+        percentage: 40
+      },
+      richi: {
+        name: 'Richi',
+        percentage: 30
+      },
+      alex: {
+        name: 'Alex',
+        percentage: 30
+      }
+    }
   },
   mutations: {
     assignPrice: (state, payload) => {

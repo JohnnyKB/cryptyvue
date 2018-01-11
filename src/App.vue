@@ -4,12 +4,27 @@
       <div class="col">
         <h1>Crypto Dashboard elPiso💎</h1>
         <h2>Total moneys: <strong>{{ total | round-2dec | currency(currency) }}</strong></h2>
-        <div @click="showAmountControls = !showAmountControls" class="btn btn-sm btn-light">Toggle amount controllers</div>
+        <div 
+          @click="showAmountControls = !showAmountControls" 
+          class="btn btn-sm" 
+          :class="{ 'btn-light': !showAmountControls, 'btn-info': showAmountControls }">
+          {{ showAmountControls ? 'Hide' : 'Show'}} amount controllers
+        </div>
+        <div 
+          @click="showShareTable = !showShareTable" 
+          class="btn btn-sm" 
+          :class="{ 'btn-light': !showShareTable, 'btn-info': showShareTable }">
+          {{ showShareTable ? 'Hide' : 'Show'}} share table
+        </div>
       </div>
     </div>
     <hr>
     <div v-if="showAmountControls">
       <amount-controller></amount-controller>
+      <hr>
+    </div>
+    <div v-if="showShareTable">
+      <share-table :total="total"></share-table>
       <hr>
     </div>
     <div class="row justify-content-center">
@@ -45,6 +60,7 @@
 import Coin from './components/Coin.vue';
 import AmountController from './components/AmountController.vue';
 import CurrencyController from './components/CurrencyController.vue';
+import ShareTable from './components/ShareTable.vue';
 import { mapActions } from 'vuex';
 
 console.log(process.env.DB_HOST);
@@ -55,7 +71,8 @@ export default {
     return {
       currency: this.$store.state.currency,
       mode: this.$route.params.mode,
-      showAmountControls: false
+      showAmountControls: false,
+      showShareTable: false
     };
   },
   computed: {
@@ -85,7 +102,8 @@ export default {
   components: {
     Coin,
     AmountController,
-    CurrencyController
+    CurrencyController,
+    ShareTable
   },
   methods: {
     ...mapActions([

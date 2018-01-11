@@ -6,7 +6,7 @@ import { store } from './store/store';
 import { routes } from './routes';
 
 Vue.filter('round-2dec', value => {
-  return Math.round(value * 100) / 100;
+  return (Math.round(value * 100) / 100).toLocaleString();
 });
 
 Vue.filter('currency', (value, currency) => {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="target">
     <select @change="applySetCurrency(selected)" v-model="selected">
       <option value="USD">USD</option>
       <option value="EUR">EUR</option>
@@ -26,3 +26,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.target {
+  margin-bottom: 20px;
+}
+</style>
