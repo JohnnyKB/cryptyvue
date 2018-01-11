@@ -1,6 +1,6 @@
 <template>
   <div class="input-group mb-3">
-    <input v-model="amount" type="number" step="0.000001" class="form-control text-right" >
+    <input v-model="amount" type="tel" step="0.000001" class="form-control text-right" >
     <div class="input-group-append">
       <span class="input-group-text" id="basic-addon2">{{ coin.code }}</span>
     </div>
