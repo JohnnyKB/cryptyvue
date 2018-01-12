@@ -151,6 +151,9 @@ export const store = new Vuex.Store({
     },
     setCurrency: (state, payload) => {
       state.currency = payload;
+    },
+    resetPrice: (state, payload) => {
+      state.values[payload.code] = 0;
     }
   },
   actions: {
@@ -176,17 +179,20 @@ export const store = new Vuex.Store({
     },
     getCoinMarketCapPrices: async function(context) {
       const currencies = [
-        'bitcoin',
-        'litecoin',
-        'ripple',
-        'tron',
-        'ethereum',
-        'stellar'
+        { name: 'bitcoin', code: 'BTC' },
+        { name: 'litecoin', code: 'LTC' },
+        { name: 'ripple', code: 'XRP' },
+        { name: 'tron', code: 'TRX' },
+        { name: 'ethereum', code: 'ETH' },
+        { name: 'stellar', code: 'XLM' }
       ];
+      currencies.forEach(c => {
+        context.commit('resetPrice', { code: c.code });
+      });
       for (var c of currencies) {
-        const data = await getCMCPrice(c, this.state.currency);
+        const data = await getCMCPrice(c.name, this.state.currency);
         context.commit('assignCMCPrice', {
-          name: c,
+          name: c.name,
           price: data.value,
           code: data.code
         });
