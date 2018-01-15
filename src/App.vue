@@ -72,7 +72,7 @@ export default {
       currency: this.$store.state.currency,
       mode: this.$route.params.mode,
       showAmountControls: false,
-      showShareTable: false
+      showShareTable: true
     };
   },
   computed: {
