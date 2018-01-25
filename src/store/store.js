@@ -122,24 +122,24 @@ export const store = new Vuex.Store({
     shares: {
       johnny: {
         name: 'Johnny',
-        percentage: 40,
+        percentage: 35,
         initial: 1400
       },
       richi: {
         name: 'Richi',
-        percentage: 30,
+        percentage: 26,
         initial: 1400
       },
       alex: {
         name: 'Alex',
-        percentage: 30,
+        percentage: 26,
         initial: 1400
+      },
+      navas: {
+        name: 'Navas',
+        percentage: 13,
+        initial: 1000
       }
-      // navas: {
-      //   name: 'Navas',
-      //   percentage: 10,
-      //   initial: 1000
-      // }
     }
   },
   mutations: {
