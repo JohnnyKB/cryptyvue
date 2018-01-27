@@ -88,7 +88,7 @@ export const store = new Vuex.Store({
       {
         name: 'Bitcoin',
         code: 'BTC',
-        value: 0.419554
+        value: 0.419554 + 0.10783795
       },
       {
         name: 'Ripple',
