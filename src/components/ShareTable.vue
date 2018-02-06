@@ -18,7 +18,7 @@
                             'red': (total * s.percentage / 100) - s.initial < 0 }">
               {{ ((total * s.percentage / 100) - s.initial) | round-2dec | currency(currency) }}
             </span>
-            <strong>(x{{ ((total * s.percentage / 100) - s.initial) / s.initial + 1 | round-2dec }})</strong>
+            <strong>({{ getPercentage(s) }})</strong>
           </td>
         </tr>
       </tbody>
@@ -38,6 +38,14 @@ export default {
     },
     currency() {
       return this.$store.state.currency;
+    }
+  },
+  methods: {
+    getPercentage(share) {
+      const benefit = this.total * share.percentage / 100 - share.initial;
+      const filter = this.$options.filters['round-2dec'];
+      const percentage = benefit * 100 / share.initial;
+      return `${percentage > 0 ? '+' : ''}${filter(percentage)}%`;
     }
   }
 };
