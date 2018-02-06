@@ -33,16 +33,19 @@
     <div v-if="mode==='johnny'">
       <hr>
       <div class="row justify-content-center mt-3">
-        <h3>Johnny total: <strong>{{ johnnyTotal | round-2dec | currency(currency) }}</strong></h3>
+        <h3>
+          Johnny total: <strong>{{ johnnyTotal | round-2dec | currency(currency) }}</strong>
+          <small>{{ getPercentage({percentage: 100, initial: personalInvestments[mode].amount }) }}</small>
+        </h3>
         <div class="table-responsive">
         <table class="table table-sm" style="max-width: 320px; margin: 0 auto;">
           <tr>
-            <td>+40%</td>
-            <td>{{ total*0.4 | round-2dec | currency(currency) }}</td>
+            <td>+{{ shares[mode].percentage }}%</td>
+            <td>{{ total*shares[mode].percentage/100 | round-2dec | currency(currency) }}</td>
           </tr>
           <tr>
             <td>Total</td>
-            <td><strong>{{ johnnyTotal + total * 0.4 | round-2dec | currency(currency) }}</strong></td>
+            <td><strong>{{ johnnyTotal + total*shares[mode].percentage/100 | round-2dec | currency(currency) }}</strong></td>
           </tr>
         </table>
         </div>
@@ -97,6 +100,12 @@ export default {
     },
     johnnyCoins() {
       return this.$store.state.johnnyWallet;
+    },
+    shares() {
+      return this.$store.state.shares;
+    },
+    personalInvestments() {
+      return this.$store.state.personalInvestments;
     }
   },
   components: {
@@ -113,6 +122,12 @@ export default {
     ]),
     updateCurrency(newCurrency) {
       this.currency = newCurrency;
+    },
+    getPercentage(share) {
+      const benefit = this.johnnyTotal * share.percentage / 100 - share.initial;
+      const filter = this.$options.filters['round-2dec'];
+      const percentage = benefit * 100 / share.initial;
+      return `${percentage > 0 ? '+' : ''}${filter(percentage)}%`;
     }
   },
   created() {

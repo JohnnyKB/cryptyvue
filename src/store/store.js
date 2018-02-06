@@ -77,7 +77,9 @@ export const store = new Vuex.Store({
       ETH: 0,
       XRP: 0,
       TRX: 0,
-      XLM: 0
+      XLM: 0,
+      ADA: 0,
+      XEM: 0
     },
     wallet: [
       {
@@ -116,6 +118,16 @@ export const store = new Vuex.Store({
         name: 'Stellar',
         code: 'XLM',
         value: 1497.2475
+      },
+      {
+        name: 'Cardano',
+        code: 'ADA',
+        value: 543.456
+      },
+      {
+        name: 'NEM',
+        code: 'XEM',
+        value: 362.9707934
       }
     ],
     currency: 'EUR',
@@ -139,6 +151,11 @@ export const store = new Vuex.Store({
         name: 'Navas',
         percentage: 13,
         initial: 1000
+      }
+    },
+    personalInvestments: {
+      johnny: {
+        amount: 300 + 90 + 25
       }
     }
   },
@@ -192,7 +209,9 @@ export const store = new Vuex.Store({
         { name: 'ripple', code: 'XRP' },
         { name: 'tron', code: 'TRX' },
         { name: 'ethereum', code: 'ETH' },
-        { name: 'stellar', code: 'XLM' }
+        { name: 'stellar', code: 'XLM' },
+        { name: 'cardano', code: 'ADA' },
+        { name: 'NEM', code: 'XEM' }
       ];
       currencies.forEach(c => {
         context.commit('resetPrice', { code: c.code });
